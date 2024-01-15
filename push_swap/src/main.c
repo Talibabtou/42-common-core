@@ -6,7 +6,7 @@
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:27:06 by gdumas            #+#    #+#             */
-/*   Updated: 2024/01/09 15:39:56 by gdumas           ###   ########.fr       */
+/*   Updated: 2024/01/15 13:45:11 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (0);
+	if (ac == 2)
+		ft_strtok(av);
 	if (!is_correct_input(av))
 		exit_error(NULL, NULL);
 	stack_b = NULL;
-	stack_a = fill_stack_values(ac, av);
+	stack_a = fill_stack_values(av);
 	stack_size = get_stack_size(stack_a);
 	assign_index(stack_a, stack_size + 1);
 	push_swap(&stack_a, &stack_b, stack_size);
