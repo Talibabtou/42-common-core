@@ -6,7 +6,7 @@
 #    By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 14:23:03 by gdumas            #+#    #+#              #
-#    Updated: 2024/01/11 13:59:06 by gdumas           ###   ########.fr        #
+#    Updated: 2024/01/15 12:34:46 by gdumas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,37 +61,37 @@ re: fclean all
 
 # Test Commands #
 
-test2:				$(NAME)	
+test2:				all
 					$(eval ARG = $(shell shuf -i 0-100 -n 2))
 					./push_swap $(ARG) | ./checker_linux $(ARG)
 					@echo -n "Instructions: "
 					@./push_swap $(ARG) | wc -l
 
-test3:				$(NAME)	
+test3:				all
 					$(eval ARG = $(shell shuf -i 0-100 -n 3))
 					./push_swap $(ARG) | ./checker_linux $(ARG)
 					@echo -n "Instructions: "
 					@./push_swap $(ARG) | wc -l
 
-test5:				$(NAME)	
+test5:				all
 					$(eval ARG = $(shell shuf -i 0-5000 -n 5))
 					./push_swap $(ARG) | ./checker_linux $(ARG)
 					@echo -n "Instructions: "
 					@./push_swap $(ARG) | wc -l
 
-test100:			$(NAME)	
+test100:			all
 					$(eval ARG = $(shell shuf -i 0-5000 -n 100))
 					./push_swap $(ARG) | ./checker_linux $(ARG)
 					@echo -n "Instructions: "
 					@./push_swap $(ARG) | wc -l
 
-test500:			$(NAME)	
+test500:			all
 					$(eval ARG = $(shell shuf -i 0-5000 -n 500))
 					./push_swap $(ARG) | ./checker_linux $(ARG)
 					@echo -n "Instructions: "
 					@./push_swap $(ARG) | wc -l
 
-test1000:			$(NAME)	
+test1000:			all
 					$(eval ARG = $(shell shuf -i 0-5000 -n 1000))
 					./push_swap $(ARG) | ./checker_linux $(ARG)
 					@echo -n "Instructions: "
