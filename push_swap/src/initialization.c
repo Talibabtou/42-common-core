@@ -6,13 +6,13 @@
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:39:03 by gdumas            #+#    #+#             */
-/*   Updated: 2024/01/09 16:55:03 by gdumas           ###   ########.fr       */
+/*   Updated: 2024/01/15 13:44:43 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*fill_stack_values(int ac, char **av)
+t_stack	*fill_stack_values(char **av)
 {
 	t_stack		*stack_a;
 	long int	nb;
@@ -21,7 +21,7 @@ t_stack	*fill_stack_values(int ac, char **av)
 	stack_a = NULL;
 	nb = 0;
 	i = 1;
-	while (i < ac)
+	while (av[i])
 	{
 		nb = ft_atoi(av[i]);
 		if (nb > INT_MAX || nb < INT_MIN)
