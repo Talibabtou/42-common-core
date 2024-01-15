@@ -6,7 +6,7 @@
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:25:43 by gdumas            #+#    #+#             */
-/*   Updated: 2024/01/11 13:57:24 by gdumas           ###   ########.fr       */
+/*   Updated: 2024/01/15 13:44:52 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_stack
 
 /* Initialization */
 
-t_stack		*fill_stack_values(int ac, char **av);
+t_stack		*fill_stack_values(char **av);
 void		assign_index(t_stack *stack_a, int ac);
 
 /* Sorting Algorithms */
@@ -85,6 +85,7 @@ void		free_stack(t_stack **stack);
 long int	ft_atoi(const char *str);
 void		ft_putstr(char *str);
 int			nb_abs(int nb);
+void		ft_strtok(char **av);
 
 /* Error */
 
