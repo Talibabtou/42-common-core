@@ -22,6 +22,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include "libft.h"
 
 int		open_file(char *file, int n);
 char	*get_env(char *name, char **env);
