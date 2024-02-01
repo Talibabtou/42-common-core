@@ -6,7 +6,7 @@
 #    By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 13:27:07 by gdumas            #+#    #+#              #
-#    Updated: 2024/01/31 16:54:01 by gdumas           ###   ########.fr        #
+#    Updated: 2024/02/01 10:38:46 by gdumas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ PUT_SRC =	ft_putchar_fd	\
 
 STR_SRC =	ft_split	\
 			ft_strchr	\
+			ft_strcmp	\
 			ft_strdup	\
 			ft_strjoin	\
 			ft_strlcat	\
@@ -96,27 +97,24 @@ OBJS	=	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 all				:	$(NAME)
 
 $(NAME)			:	$(OBJS)
-				@echo "Creating libft.a"
+				@echo "Creating library: libft.a"
 				@$(AR) $(NAME) $^
 				@echo "Done !"
 
-$(OBJ_DIR)%.o	:	$(SRC_DIR)%.c $(HEADER)| $(OBJ_DIR)
+$(OBJ_DIR)%.o	:	$(SRC_DIR)%.c $(HEADER)
 				@mkdir -p $(dir $@)
 				@echo "Compiling $<"
 				@$(CC) $(FLAGS) -c $< -o $@
 
-$(OBJ_DIR)		:
-				@mkdir -p $(OBJ_DIR)
-
 clean			:
 				@if [ -d "$(OBJ_DIR)" ]; then			\
-					echo "Cleaning obj directory";	\
+					echo "Cleaning libft obj directory";\
 					rm -rf $(OBJ_DIR);					\
 				fi
 
 fclean			:	clean
 				@if [ -f "libft.a" ]; then				\
-					echo "Cleaning libft.a";		\
+					echo "Cleaning library: libft.a";	\
 					rm -f $(NAME);						\
 				fi
 
