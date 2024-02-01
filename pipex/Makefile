@@ -50,21 +50,21 @@ $(OBJ_DIR)%.o	:	$(SRC_DIR)%.c $(HEADER)
 				@$(CC) $(FLAGS) -c $< -o $@
 
 force			:
-				@make -C src/libft
+				@make -sC src/libft
 
 clean			:
 				@if [ -d "$(OBJ_DIR)" ]; then		\
 					echo "Cleaning pipex obj directory";	\
 					rm -rf $(OBJ_DIR);				\
 				fi
-				@make -C src/libft clean
+				@make -sC src/libft clean
 
 fclean			:	clean
 				@if [ -f "pipex" ]; then	\
 					echo "Cleaning program: pipex";	\
 					rm -f $(NAME);			\
 				fi
-				@make -C src/libft fclean
+				@make -sC src/libft fclean
 
 re				:	fclean all
 
