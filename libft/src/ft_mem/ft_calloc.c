@@ -15,13 +15,10 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	unsigned char	*ptr;
-	size_t			i;
 
-	ptr = malloc(count * size);
+	ptr = (unsigned char *)malloc(count * size);
 	if (!ptr)
 		return (NULL);
-	i = 0;
-	while (i < count * size)
-		ptr[i++] = 0;
+	ft_memset(ptr, 0, count * size);
 	return (ptr);
 }
