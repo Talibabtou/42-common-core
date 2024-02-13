@@ -40,7 +40,8 @@ MEM_SRC =	ft_calloc	\
 			ft_memcmp	\
 			ft_memcpy	\
 			ft_memmove	\
-			ft_memset
+			ft_memset	\
+			ft_realloc
 
 NB_SRC =	ft_atoi		\
 			ft_bzero	\
