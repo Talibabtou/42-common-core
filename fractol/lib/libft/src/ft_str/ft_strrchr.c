@@ -6,13 +6,13 @@
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:17:37 by gdumas            #+#    #+#             */
-/*   Updated: 2023/11/13 13:06:14 by gdumas           ###   ########.fr       */
+/*   Updated: 2024/08/21 15:02:35 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
 	char	*last;
 	char	find;

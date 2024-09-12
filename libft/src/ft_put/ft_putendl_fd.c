@@ -6,13 +6,21 @@
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:39:32 by gdumas            #+#    #+#             */
-/*   Updated: 2023/11/14 14:36:11 by gdumas           ###   ########.fr       */
+/*   Updated: 2024/08/21 13:25:58 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *str, int fd)
+/**
+ * @brief Outputs the string 'str' to the given file descriptor,
+ * followed by a newline.
+ * 
+ * @param str The string to output.
+ * @param fd The file descriptor on which to write.
+ * @return {int} The number of characters written.
+ */
+int	ft_putendl_fd(char *str, int fd)
 {
 	int	i;
 
@@ -22,5 +30,6 @@ void	ft_putendl_fd(char *str, int fd)
 		write(fd, &str[i], 1);
 		i++;
 	}
-	write(fd, "\n", 1);
+	i += write(fd, "\n", 1);
+	return (i);
 }

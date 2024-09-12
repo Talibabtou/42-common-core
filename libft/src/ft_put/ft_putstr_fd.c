@@ -6,15 +6,22 @@
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 08:53:03 by gdumas            #+#    #+#             */
-/*   Updated: 2023/11/13 13:02:00 by gdumas           ###   ########.fr       */
+/*   Updated: 2024/08/21 13:23:02 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+/**
+ * @brief Outputs the string 's' to the given file descriptor.
+ * 
+ * @param s The string to output.
+ * @param fd The file descriptor on which to write.
+ * @return {int} The number of characters written.
+ */
+int	ft_putstr_fd(char *s, int fd)
 {
 	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
+		return (0);
+	return (write(fd, s, ft_strlen(s)));
 }

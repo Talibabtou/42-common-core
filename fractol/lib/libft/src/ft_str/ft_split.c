@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: talibabtou <talibabtou@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:08:21 by gdumas            #+#    #+#             */
-/*   Updated: 2023/11/15 16:11:59 by gdumas           ###   ########.fr       */
+/*   Updated: 2024/09/12 19:16:45 by talibabtou       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,18 @@ static char	*ft_create_sub_string(char const *s, char c, int *j)
 	return (res);
 }
 
+static void	free_split(char **strs, int count)
+{
+	int	i;
+
+	for (i = 0; i < count; i++)
+	{
+		if (strs[i])
+			free(strs[i]);
+	}
+	free(strs);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**dest;
@@ -57,19 +69,17 @@ char	**ft_split(char const *s, char c)
 	int		j;
 
 	n = ft_count_str(s, c);
-	dest = (char **)malloc((n + 1) * sizeof(char *));
+	dest = (char **)ft_gc(malloc((n + 1) * sizeof(char *)));
 	if (!dest)
 		return (NULL);
 	i = 0;
 	j = 0;
 	while (i < n)
 	{
-		dest[i] = ft_create_sub_string(s, c, &j);
+		dest[i] = ft_gc(ft_create_sub_string(s, c, &j));
 		if (!dest[i])
 		{
-			while (i >= 0)
-				free(dest[i--]);
-			free(dest);
+			free_split(dest, i);
 			return (NULL);
 		}
 		i++;
