@@ -6,7 +6,7 @@
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 08:53:15 by gdumas            #+#    #+#             */
-/*   Updated: 2023/11/13 13:23:26 by gdumas           ###   ########.fr       */
+/*   Updated: 2024/09/17 16:27:24 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	out = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	out = ft_gc((char *)malloc(sizeof(char) * (s1_len + s2_len + 1)));
 	if (out == NULL)
 		return (NULL);
 	ft_strlcpy(out, s1, s1_len + 1);

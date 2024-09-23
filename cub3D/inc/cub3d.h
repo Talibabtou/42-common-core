@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: talibabtou <talibabtou@student.42.fr>      +#+  +:+       +#+        */
+/*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:01:22 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/12 19:04:08 by talibabtou       ###   ########.fr       */
+/*   Updated: 2024/09/17 14:01:55 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,22 @@
 
 /* Config Parameters */
 # ifndef SCREEN_WIDTH
-#  define SCREEN_WIDTH 1640
+#  define SCREEN_WIDTH 1640.0
 # endif
 # ifndef SCREEN_HEIGHT
-#  define SCREEN_HEIGHT 950
+#  define SCREEN_HEIGHT 950.0
+# endif
+# ifndef FOV
+#  define FOV 90.0
+# endif
+# ifndef PLAYER_STEP_SIZE
+#  define PLAYER_STEP_SIZE 0.06
+# endif
+# ifndef PLAYER_ROT_SPEED
+#  define PLAYER_ROT_SPEED 0.02
 # endif
 # define MAX_WIDTH 2000
 # define MAX_HEIGHT 1600
-# define FOV 90
-# define PLAYER_STEP_SIZE 0.04
-# define PLAYER_ROT_SPEED 0.01
 # define PI 3.1415926535
 
 /* Colors Definitions */
@@ -90,12 +96,6 @@ typedef struct s_key_handl
 
 }	t_key_handl;
 
-typedef struct s_fvector
-{
-	float	x;
-	float	y;
-}	t_fvector;
-
 typedef struct s_dvector
 {
 	double	x;
@@ -110,20 +110,18 @@ typedef struct s_ivector
 
 typedef struct s_player
 {
-	double		dir_angle;
 	t_dvector	pos;
 	t_dvector	dir;
-	t_dvector	plane;
 	t_dvector	movement;
+	double		dir_angle;
 	double		aspect_ratio;
-	double		plane_fov;
-	float		step_size;
-	float		rot_speed;
+	double		step_size;
 }	t_player;
 
 typedef struct t_dda
 {
 	double	dist;
+	double	corrected_dist;
 	char	orientation;
 }	t_dda;
 
@@ -131,18 +129,12 @@ typedef struct s_ray
 {
 	t_ivector	grid_pos;
 	t_ivector	step_direction;
-	t_dvector	true_pos;
+	t_dvector	head_pos;
 	t_dvector	dir;
 	t_dvector	delta_dist;
 	t_dvector	side_dist;
+	double		angle_step;
 }	t_ray;
-
-typedef struct s_raycast
-{
-	double	camera_x;
-	double	perp_wall_dist;
-	t_ray	ray;
-}	t_raycast;
 
 typedef struct s_colors
 {
@@ -228,6 +220,7 @@ typedef struct s_cub3d
 	t_image			framebuffer;
 	t_key_handl		key;
 	t_overlay		overlay;
+	t_ray			ray;
 }	t_cub3d;
 
 /* Functions Definitions */
@@ -264,14 +257,14 @@ int		modif_player(t_cub3d *data);
 bool	try_move(t_grid *grid, t_dvector *pos, double dx, double dy);
 bool	is_player(char c);
 double	to_rad(int degrees);
-void	process_player_movement(t_player *player);
+void	player_next_movement(t_player *player);
 void	process_player_dir(t_player *player);
-void	process_player_plane(t_player *player);
 
 /** Ray-casting/DDA **/
 void	get_ray_config_dda(t_ray *ray);
 void	init_ray(const double camera_x, t_player *player, t_ray *ray);
-void	get_wall_config_dda(const t_grid *grid, t_ray *ray, t_dda *wall_config);
+void	get_wall_config_dda(const t_grid *grid, t_ray *ray,
+			t_dda *wall_config, double ray_angle);
 
 /** Parsing **/
 void	process_config_and_map(t_cub3d *data, char *file);

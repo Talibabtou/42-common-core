@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: talibabtou <talibabtou@student.42.fr>      +#+  +:+       +#+        */
+/*   By: bboissen <bboissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 13:57:59 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/12 18:39:01 by talibabtou       ###   ########.fr       */
+/*   Updated: 2024/09/16 11:41:23 by bboissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,16 @@ static int	get_size_file(char *file)
 	if (fd < 0)
 		free_and_exit_error(FILE_PATH);
 	size = 0;
-	while ((bytes_read = read(fd, buffer, sizeof(buffer))) > 0)
+	bytes_read = read(fd, buffer, sizeof(buffer));
+	while (bytes_read > 0)
+	{
 		size += bytes_read;
+		bytes_read = read(fd, buffer, sizeof(buffer));
+	}
 	if (bytes_read < 0)
 		free_and_exit_error(READ_ERROR);
 	close(fd);
-	return size;
+	return (size);
 }
 
 /**

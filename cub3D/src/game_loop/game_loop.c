@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: talibabtou <talibabtou@student.42.fr>      +#+  +:+       +#+        */
+/*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 13:57:34 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/05 08:17:29 by talibabtou       ###   ########.fr       */
+/*   Created: 2024/09/16 10:46:34 by bboissen          #+#    #+#             */
+/*   Updated: 2024/09/17 15:51:02 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,21 @@
  */
 static void	create_raycast_img(t_cub3d *data)
 {
-	t_ray		ray;
-	t_player	*player;
-	t_dda		wall_ray;
-	double		camera_x;
-	int			x;
+	t_player		*player;
+	t_dda			wall_ray;
+	double			ray_angle;
+	int				x;
 
 	x = 0;
 	player = &(data->player);
 	draw_floor_ceil(data, &data->framebuffer);
 	while (x < SCREEN_WIDTH)
 	{
-		camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
-		init_ray(camera_x, player, &ray);
-		get_ray_config_dda(&ray);
-		get_wall_config_dda(&(data->grid), &ray, &wall_ray);
-		add_pixels_col_to_img_txt(data, x, &wall_ray, &ray);
+		ray_angle = (x - SCREEN_WIDTH * 0.5) * data->ray.angle_step;
+		init_ray(player->dir_angle + ray_angle, player, &data->ray);
+		get_ray_config_dda(&data->ray);
+		get_wall_config_dda(&(data->grid), &data->ray, &wall_ray, ray_angle);
+		add_pixels_col_to_img_txt(data, x, &wall_ray, &data->ray);
 		x++;
 	}
 	mlx_put_image_to_window(data->mlx.mlx_ptr,
@@ -61,6 +60,10 @@ int	game_loop(t_cub3d *data)
  */
 void	game_event_loop(t_cub3d *data)
 {
+	t_ray	ray;
+
+	ray.angle_step = tan(to_rad(FOV) * 0.5) / SCREEN_WIDTH;
+	data->ray = ray;
 	mlx_hook(data->mlx.win_ptr, 17, 0L, exit_button, data);
 	mlx_hook(data->mlx.win_ptr, 02, 1L << 0, key_press_hook, data);
 	mlx_hook(data->mlx.win_ptr, 03, 1L << 1, key_release_hook, data);

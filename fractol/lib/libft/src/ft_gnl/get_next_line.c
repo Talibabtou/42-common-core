@@ -6,7 +6,7 @@
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:35:46 by gdumas            #+#    #+#             */
-/*   Updated: 2024/01/31 13:27:40 by gdumas           ###   ########.fr       */
+/*   Updated: 2024/09/17 16:29:24 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*extract_buffer_in_line(char *buffer, char *line)
 		i++;
 	while (buffer[j] && buffer[j - 1] != '\n')
 		j++;
-	new_line = (char *) malloc ((i + j + 1) * sizeof(char));
+	new_line = ft_gc((char *) malloc ((i + j + 1) * sizeof(char)));
 	if (!new_line)
 		return (free(line), NULL);
 	new_line[0] = '\0';

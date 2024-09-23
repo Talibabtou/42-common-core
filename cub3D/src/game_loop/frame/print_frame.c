@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 13:56:59 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/04 15:26:37 by gdumas           ###   ########.fr       */
+/*   Created: 2024/09/16 10:47:34 by bboissen          #+#    #+#             */
+/*   Updated: 2024/09/17 15:51:51 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	draw_floor_ceil(t_cub3d *data, t_image *img)
 	int	j;
 	int	half_screen_height;
 
-	half_screen_height = SCREEN_HEIGHT / 2;
+	half_screen_height = (int) SCREEN_HEIGHT * 0.5;
 	i = 0;
 	while (i < half_screen_height)
 	{
@@ -74,9 +74,9 @@ static int	get_texture_x(t_ray *ray, t_dda *wall, t_texture *texture)
 	int		tex_x;
 
 	if (wall->orientation == 'N' || wall->orientation == 'S')
-		wall_hit_pos = ray->true_pos.x + wall->dist * ray->dir.x;
+		wall_hit_pos = ray->head_pos.x + wall->dist * ray->dir.x;
 	else
-		wall_hit_pos = ray->true_pos.y + wall->dist * ray->dir.y;
+		wall_hit_pos = ray->head_pos.y + wall->dist * ray->dir.y;
 	wall_hit_pos -= floor(wall_hit_pos);
 	tex_x = (int)(wall_hit_pos * (double)texture->x);
 	return (tex_x);
@@ -119,8 +119,9 @@ void	add_pixels_col_to_img_txt(t_cub3d *data, int x,
 
 	texture = texture_to_display(data, wall_config->orientation);
 	c.tex_x = get_texture_x(ray, wall_config, texture);
-	c.height = (int)(SCREEN_HEIGHT / wall_config->dist);
-	c.y_start = (SCREEN_HEIGHT - c.height) / 2;
+	c.height = (int)(data->player.aspect_ratio * 1.5 * (SCREEN_HEIGHT
+				/ (wall_config->corrected_dist * FOV / 90.0)));
+	c.y_start = (int)((SCREEN_HEIGHT - c.height) * 0.5);
 	c.y_end = c.y_start + c.height;
 	i = c.y_start;
 	while (i < c.y_end)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bboissen <bboissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 13:57:18 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/04 15:28:47 by gdumas           ###   ########.fr       */
+/*   Created: 2024/09/16 10:46:59 by bboissen          #+#    #+#             */
+/*   Updated: 2024/09/17 11:19:03 by bboissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ double	to_rad(int degrees)
  * 
  * @param player Pointer to the player structure.
  */
-void	process_player_movement(t_player *player)
+void	player_next_movement(t_player *player)
 {
-	player->movement.x = cos(player->dir_angle) * PLAYER_STEP_SIZE;
-	player->movement.y = sin(player->dir_angle) * PLAYER_STEP_SIZE;
+	player->movement.x = player->dir.x * PLAYER_STEP_SIZE;
+	player->movement.y = player->dir.y * PLAYER_STEP_SIZE;
 }
 
 /**
@@ -55,15 +55,4 @@ void	process_player_dir(t_player *player)
 {
 	player->dir.x = cos(player->dir_angle);
 	player->dir.y = sin(player->dir_angle);
-}
-
-/**
- * @brief Updates the player's plane vector based on their direction.
- * 
- * @param player Pointer to the player structure.
- */
-void	process_player_plane(t_player *player)
-{
-	player->plane.x = -player->dir.y * player->plane_fov;
-	player->plane.y = player->dir.x * player->plane_fov * player->aspect_ratio;
 }

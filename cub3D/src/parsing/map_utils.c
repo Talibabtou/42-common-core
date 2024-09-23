@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: talibabtou <talibabtou@student.42.fr>      +#+  +:+       +#+        */
+/*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 13:58:09 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/05 11:27:08 by talibabtou       ###   ########.fr       */
+/*   Updated: 2024/09/16 18:10:23 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,6 @@ bool	is_space_line(const char *str)
 		str++;
 	}
 	return (true);
-}
-
-/**
- * @brief Gets the height of the grid.
- * 
- * @param grid The grid to get the height of.
- * @return The height of the grid.
- */
-int	get_height_grid(char **grid)
-{
-	int	i;
-
-	i = 0;
-	while (grid[i])
-		i++;
-	if (i > MAX_HEIGHT)
-		free_and_exit_error(SIZE_ERROR_GRID);
-	return (i);
 }
 
 /**
@@ -75,6 +57,16 @@ int	get_max_width_grid(char **grid)
 	return (width);
 }
 
+static bool	check_vertical_adjacent(char *line, int x)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && i < x)
+		i++;
+	return (i == x && (line[i] == ' ' || line[i] == '\0'));
+}
+
 /**
  * @brief Checks if a character is adjacent to a space in the map.
  * 
@@ -85,16 +77,21 @@ int	get_max_width_grid(char **grid)
  */
 bool	is_char_adjacent_to_space(char **map, int x, int y)
 {
-	char c = map[y][x];
+	char	c;
 
+	if (!map || !map[y] || x < 0 || y < 0)
+		return (false);
+	c = map[y][x];
 	if (c != '0' && c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != 'D')
 		return (false);
-	if (map[y][x + 1] == ' ' || map[y][x + 1] == '\0' ||
-		map[y][x - 1] == ' ' ||
-		map[y + 1][x] == ' ' || map[y + 1][x] == '\0' ||
-		map[y - 1][x] == ' ' || map[y - 1][x] == '\0')
+	if (map[y][x + 1] == ' ' || map[y][x + 1] == '\0')
 		return (true);
-
+	if (x > 0 && map[y][x - 1] == ' ')
+		return (true);
+	if (map[y + 1] && check_vertical_adjacent(map[y + 1], x))
+		return (true);
+	if (y > 0 && map[y - 1] && check_vertical_adjacent(map[y - 1], x))
+		return (true);
 	return (false);
 }
 

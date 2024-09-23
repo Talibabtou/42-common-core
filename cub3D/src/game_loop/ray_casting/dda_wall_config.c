@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 13:57:30 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/04 15:30:43 by gdumas           ###   ########.fr       */
+/*   Created: 2024/09/16 10:46:54 by bboissen          #+#    #+#             */
+/*   Updated: 2024/09/17 15:52:12 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ static double	process_wall_dist(char last_side_tested, const t_ray *ray)
 	double	perp_wall_dist;
 
 	if (last_side_tested == 'x')
-		perp_wall_dist = (ray->grid_pos.x - ray->true_pos.x
-				+ (1 - ray->step_direction.x) / 2) / ray->dir.x;
+		perp_wall_dist = (ray->grid_pos.x - ray->head_pos.x
+				+ (1 - ray->step_direction.x) * 0.5) / ray->dir.x;
 	else
-		perp_wall_dist = (ray->grid_pos.y - ray->true_pos.y
-				+ (1 - ray->step_direction.y) / 2) / ray->dir.y;
+		perp_wall_dist = (ray->grid_pos.y - ray->head_pos.y
+				+ (1 - ray->step_direction.y) * 0.5) / ray->dir.y;
 	return (perp_wall_dist);
 }
 
@@ -76,7 +76,8 @@ static char	process_wall_orientation(const t_ray *ray, char last_side_tested)
  * @param ray Pointer to the ray structure.
  * @param wall_config Pointer to the wall configuration structure.
  */
-void	get_wall_config_dda(const t_grid *grid, t_ray *ray, t_dda *wall_config)
+void	get_wall_config_dda(const t_grid *grid, t_ray *ray,
+	t_dda *wall_config, double ray_angle)
 {
 	bool	hit;
 	char	last_side_tested;
@@ -99,5 +100,6 @@ void	get_wall_config_dda(const t_grid *grid, t_ray *ray, t_dda *wall_config)
 		hit = is_wall_detected(grid, ray);
 	}
 	wall_config->dist = process_wall_dist(last_side_tested, ray);
+	wall_config->corrected_dist = wall_config->dist * cos(ray_angle);
 	wall_config->orientation = process_wall_orientation(ray, last_side_tested);
 }

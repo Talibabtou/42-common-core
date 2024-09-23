@@ -6,7 +6,7 @@
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:25:35 by gdumas            #+#    #+#             */
-/*   Updated: 2024/02/08 18:32:50 by gdumas           ###   ########.fr       */
+/*   Updated: 2024/09/17 16:28:14 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 		free(ptr);
 		return (NULL);
 	}
-	new_ptr = malloc(new_size);
+	new_ptr = ft_gc(malloc(new_size));
 	if (new_ptr == NULL)
 		return (NULL);
 	if (ptr != NULL)

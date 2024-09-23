@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: talibabtou <talibabtou@student.42.fr>      +#+  +:+       +#+        */
+/*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 13:58:04 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/12 18:36:08 by talibabtou       ###   ########.fr       */
+/*   Updated: 2024/09/17 16:39:17 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ bool	is_map_enclosed_by_walls(char **grid, unsigned int height)
 }
 
 /**
- * @brief Allocates memory for the grid and copies the content from the input grid.
- * 
+ * @brief Allocates memory for the grid and copies
+ * the content from the input grid.
  * @param grid_in_file The input grid to copy from.
  * @param height The height of the grid.
  * @return A pointer to the newly allocated and copied grid.
@@ -111,12 +111,7 @@ static char	**allocate_and_copy_grid(char **grid_in_file, int height)
 	{
 		ret_map[i] = ft_gc(ft_strdup(grid_in_file[i]));
 		if (!ret_map[i])
-		{
-			while (i > 0)
-				free(ret_map[--i]);
-			free(ret_map);
 			free_and_exit_error(MALLOC_ERR_MSG);
-		}
 		i++;
 	}
 	ret_map[i] = NULL;
@@ -134,7 +129,13 @@ void	extract_grid(t_grid *grid, char **grid_in_file)
 	int		height;
 	char	**ret_map;
 
-	height = get_height_grid(grid_in_file);
+	height = 0;
+	while (grid_in_file[height])
+	{
+		height++;
+		if (height > MAX_HEIGHT)
+			free_and_exit_error(SIZE_ERROR_GRID);
+	}
 	if (!is_valid_map(grid_in_file, height))
 		free_and_exit_error(MAP_ERROR);
 	ret_map = allocate_and_copy_grid(grid_in_file, height);

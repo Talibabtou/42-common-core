@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: talibabtou <talibabtou@student.42.fr>      +#+  +:+       +#+        */
+/*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:08:21 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/12 19:16:45 by talibabtou       ###   ########.fr       */
+/*   Updated: 2024/09/17 16:31:17 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,6 @@ static char	*ft_create_sub_string(char const *s, char c, int *j)
 	return (res);
 }
 
-static void	free_split(char **strs, int count)
-{
-	int	i;
-
-	for (i = 0; i < count; i++)
-	{
-		if (strs[i])
-			free(strs[i]);
-	}
-	free(strs);
-}
-
 char	**ft_split(char const *s, char c)
 {
 	char	**dest;
@@ -78,10 +66,7 @@ char	**ft_split(char const *s, char c)
 	{
 		dest[i] = ft_gc(ft_create_sub_string(s, c, &j));
 		if (!dest[i])
-		{
-			free_split(dest, i);
 			return (NULL);
-		}
 		i++;
 	}
 	dest[n] = 0;

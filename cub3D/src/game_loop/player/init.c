@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 13:57:08 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/04 15:26:58 by gdumas           ###   ########.fr       */
+/*   Created: 2024/09/16 10:47:16 by bboissen          #+#    #+#             */
+/*   Updated: 2024/09/18 16:24:22 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
  */
 static double	get_player_dir_relative_angle(char orientation)
 {
-	if (orientation == 'W')
+	if (orientation == 'E')
 		return (to_rad(0));
 	else if (orientation == 'S')
 		return (to_rad(90));
-	else if (orientation == 'E')
+	else if (orientation == 'W')
 		return (to_rad(180));
 	else
 		return (to_rad(270));
@@ -89,16 +89,11 @@ static void	adjust_player_pos_to_near_walls(char **grid_c, t_player *player)
  */
 void	init_player(t_grid *grid, t_player *player)
 {
-	player->aspect_ratio = (SCREEN_WIDTH
-			/ (SCREEN_HEIGHT * 1.9));
-	player->plane_fov = (tan((FOV * PI / 180) / 2) * player->aspect_ratio);
-	player->step_size = PLAYER_STEP_SIZE / (1 / player->aspect_ratio);
-	player->rot_speed = PLAYER_ROT_SPEED / (1 / player->aspect_ratio);
+	player->aspect_ratio = ((double)SCREEN_WIDTH / (double)SCREEN_HEIGHT);
 	player->pos = get_player_pos(grid);
 	player->dir_angle = get_player_dir_relative_angle
 		(grid->content[(int)player->pos.y][(int)player->pos.x]);
 	adjust_player_pos_to_near_walls(grid->content, player);
 	process_player_dir(player);
-	process_player_plane(player);
-	process_player_movement(player);
+	player_next_movement(player);
 }

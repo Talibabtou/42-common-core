@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modifs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: talibabtou <talibabtou@student.42.fr>      +#+  +:+       +#+        */
+/*   By: bboissen <bboissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 13:57:13 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/05 08:17:29 by talibabtou       ###   ########.fr       */
+/*   Created: 2024/09/16 10:47:10 by bboissen          #+#    #+#             */
+/*   Updated: 2024/09/17 11:36:48 by bboissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ static void	modif_player_dir(t_key_handl *key, t_player *player)
 			player->dir_angle -= 2 * PI;
 	}
 	process_player_dir(player);
-	process_player_plane(player);
-	process_player_movement(player);
+	player_next_movement(player);
 }
 
 /**

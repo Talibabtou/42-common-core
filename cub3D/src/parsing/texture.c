@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: talibabtou <talibabtou@student.42.fr>      +#+  +:+       +#+        */
+/*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:07:34 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/12 18:36:58 by talibabtou       ###   ########.fr       */
+/*   Updated: 2024/09/18 13:31:29 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	has_xpm_extension(const char *path)
 	char	*extension;
 
 	extension = ft_strrchr(path, '.');
-	if (ft_strcmp(extension, ".xpm") != 0)
+	if (!extension || ft_strcmp(extension, ".xpm") != 0)
 		free_and_exit_error(TEXT_PATH);
 	return (false);
 }
