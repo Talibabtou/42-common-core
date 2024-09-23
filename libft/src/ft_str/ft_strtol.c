@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtol.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: talibabtou <talibabtou@student.42.fr>      +#+  +:+       +#+        */
+/*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:40:52 by gdumas            #+#    #+#             */
-/*   Updated: 2024/09/05 10:49:48 by talibabtou       ###   ########.fr       */
+/*   Updated: 2024/09/16 12:58:37 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static inline void	skip_whitespace(const char **s)
+static void	skip_whitespace(const char **s)
 {
 	while (**s && ft_isspace((unsigned char)**s))
 		++(*s);
 }
 
-void	parse_input(const char *nptr, int *sign, const char **endptr)
+static void	parse_input(const char *nptr, int *sign, const char **endptr)
 {
 	if (!nptr)
 	{
@@ -37,7 +37,21 @@ void	parse_input(const char *nptr, int *sign, const char **endptr)
 	*endptr = nptr;
 }
 
-long	convert_and_detect_overflow(const char *nptr, int sign, int base)
+static int	convert_digit(char c, int base)
+{
+	if (ft_isdigit((unsigned char)c))
+		return (c - '0');
+	if (base == 16)
+	{
+		if (c >= 'a' && c <= 'f')
+			return (c - 'a' + 10);
+		if (c >= 'A' && c <= 'F')
+			return (c - 'A' + 10);
+	}
+	return (-1);
+}
+
+static long	convert_and_detect_overflow(const char *nptr, int sign, int base)
 {
 	long	val;
 	int		digit;
@@ -45,18 +59,16 @@ long	convert_and_detect_overflow(const char *nptr, int sign, int base)
 	val = 0;
 	while (*nptr)
 	{
-		if (ft_isdigit((unsigned char)*nptr))
-			digit = *nptr - '0';
-		else if (base == 16 && (*nptr >= 'a' && *nptr <= 'f'))
-			digit = *nptr - 'a' + 10;
-		else if (base == 16 && (*nptr >= 'A' && *nptr <= 'F'))
-			digit = *nptr - 'A' + 10;
-		else
-			break;
-		if (digit >= base)
-			break;
+		digit = convert_digit(*nptr, base);
+		if (digit == -1 || digit >= base)
+			break ;
 		if (val > (LONG_MAX - digit) / base)
-			return (sign == 1 ? LONG_MAX : LONG_MIN);
+		{
+			if (sign == 1)
+				return (LONG_MAX);
+			else
+				return (LONG_MIN);
+		}
 		val = val * base + digit;
 		nptr++;
 	}
@@ -65,8 +77,8 @@ long	convert_and_detect_overflow(const char *nptr, int sign, int base)
 
 long	ft_strtol(const char *nptr, char **endptr, int base)
 {
-	long	val;
-	int		sign;
+	long		val;
+	int			sign;
 	const char	*end;
 
 	sign = 1;

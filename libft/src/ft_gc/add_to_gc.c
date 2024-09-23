@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_to_gc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: talibabtou <talibabtou@student.42.fr>      +#+  +:+       +#+        */
+/*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 13:55:51 by talibabtou        #+#    #+#             */
-/*   Updated: 2024/09/12 19:27:35 by talibabtou       ###   ########.fr       */
+/*   Created: 2024/09/11 13:55:51 by gdumas            #+#    #+#             */
+/*   Updated: 2024/09/16 17:44:35 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ void	add_to_gc(void *ptr)
 	t_list	*tmp;
 
 	if (!ptr)
-		return;
+		return ;
 	tmp = *gc_ptr();
 	while (tmp)
 	{
 		if (tmp->content == ptr)
-			return;
+			return ;
 		tmp = tmp->next;
 	}
 	new_node = ft_lstnew(ptr);
 	if (!new_node)
 	{
 		free(ptr);
-		return;
+		return ;
 	}
 	ft_lstadd_front(gc_ptr(), new_node);
 }

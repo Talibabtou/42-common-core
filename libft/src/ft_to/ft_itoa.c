@@ -6,7 +6,7 @@
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:29:22 by gdumas            #+#    #+#             */
-/*   Updated: 2023/11/15 10:13:40 by gdumas           ###   ########.fr       */
+/*   Updated: 2024/09/17 16:27:01 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*pre_conv(int len)
 {
 	char	*tmp;
 
-	tmp = malloc((len + 1) * sizeof(char));
+	tmp = ft_gc(malloc((len + 1) * sizeof(char)));
 	if (!tmp)
 		return (NULL);
 	tmp[0] = '0';

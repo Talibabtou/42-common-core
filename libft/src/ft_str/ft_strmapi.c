@@ -6,7 +6,7 @@
 /*   By: gdumas <gdumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 08:53:21 by gdumas            #+#    #+#             */
-/*   Updated: 2023/11/13 13:24:40 by gdumas           ###   ########.fr       */
+/*   Updated: 2024/09/17 16:27:15 by gdumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	if (!(s) || !(f))
 		return (NULL);
 	len = ft_strlen(s);
-	newstr = (char *)malloc(sizeof(char) * (len + 1));
+	newstr = ft_gc((char *)malloc(sizeof(char) * (len + 1)));
 	if (newstr == NULL)
 		return (NULL);
 	i = 0;
