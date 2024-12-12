@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Webserv Login</title>
+	<link href="assets/css/style.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/cookie.css" rel="stylesheet" type="text/css">
+	<script>
+		function setCookie() {
+			const cookieName = document.getElementById('setCookieName').value;
+			const cookieValue = document.getElementById('setCookieValue').value;
+			if (!cookieName) {
+				alert('Cookie name is required!');
+				return;
+			}
+			document.cookie = `${cookieName}=${cookieValue}; path=/`;
+			alert('Cookie set!');
+		}
+		function getCookie() {
+			const cookieName = document.getElementById('getCookieName').value;
+			if (!cookieName) {
+				alert('Please enter a cookie name to search.');
+				return;
+			}
+
+			const cookies = document.cookie.split('; ');
+			let cookieValue = null;
+			
+			for (let cookie of cookies) {
+				const [name, value] = cookie.split('=');
+				if (name === cookieName) {
+					cookieValue = value;
+					break;
+				}
+			}
+
+			if (cookieValue === null) {
+				alert('Cookie not found.');
+			} else if (cookieValue === '') {
+				alert('Cookie exists but has no value (empty).');
+			} else {
+				alert(`Cookie value: ${cookieValue}`);
+			}
+		}
+	</script>
+</head>
+<body>
+	<nav>
+		<div class="matrix-bg"></div>
+		<div class="logo"><a href="/">WEBSERV</a></div>
+		<div class="nav-links">
+			<a href="/calculator.html">Calculator</a>
+			<a href="/upload.html">Upload</a>
+			<a href="/cookie.html">Cookie</a>
+			<a href="/login.html">Login</a>
+		</div>
+	</nav>
+	<div id="app">
+		<div class="cookie-container">
+			<form class="cookie-form">
+				<h2>Cookie Management</h2>
+				<div class="cookie-actions">
+					<div class="set-cookie">
+						<h3>Set Cookie</h3>
+						<div class="input-group">
+							<input type="text" id="setCookieName" placeholder="Cookie Name" required>
+						</div>
+						<div class="input-group">
+							<input type="text" id="setCookieValue" placeholder="Cookie Value" required>
+						</div>
+						<button type="button" onclick="setCookie()">Set Cookie</button>
+					</div>
+					<div class="get-cookie">
+						<h3>Get Cookie</h3>
+						<div class="input-group">
+							<input type="text" id="getCookieName" placeholder="Cookie Name" required>
+						</div>
+						<button type="button" onclick="getCookie()">Get Cookie</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

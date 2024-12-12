@@ -1,0 +1,75 @@
+.calculator-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+	background: rgba(254, 228, 84, 0.1);
+	padding: 3rem;
+	border: 2px solid #FEE454;
+	box-shadow: 0 0 20px rgba(254, 228, 84, 0.3);
+}
+
+input[type="number"], select {
+	font-family: 'Press Start 2P', cursive;
+	background: black;
+	border: 2px solid #FEE454;
+	color: #FEE454;
+	padding: 1rem;
+	font-size: 2rem;
+	width: 300px;
+	text-align: center;
+	outline: none;
+}
+
+input[type="number"]:focus, select:focus {
+	box-shadow: 0 0 15px rgba(254, 228, 84, 0.5);
+}
+
+select {
+	width: 150px;
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath fill='%23FEE454' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 1rem center;
+	background-size: 2.5rem;
+	padding-right: 4.5rem;
+}
+
+select option {
+	background-color: black;
+	color: #FEE454;
+	font-size: 2rem;
+}
+
+select:focus option:hover {
+	background-color: rgba(254, 228, 84, 0.2);
+}
+
+button,
+.calculate-again {
+	display: inline-block;
+	font-family: 'Press Start 2P', cursive;
+	background: #FEE454;
+	border: none;
+	color: black;
+	padding: 1rem 2rem;
+	font-size: 1.2rem;
+	cursor: pointer;
+	text-decoration: none;
+	transition: all 0.3s ease;
+}
+
+button:hover,
+.calculate-again:hover {
+	background: #ffffff;
+	box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type=number] {
+	appearance: textfield;
+}

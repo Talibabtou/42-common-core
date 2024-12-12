@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Webserv Calculator</title>
+	<link href="assets/css/style.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/calculator.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<nav>
+		<div class="matrix-bg"></div>
+		<div class="logo"><a href="/">WEBSERV</a></div>
+		<div class="nav-links">
+			<a href="/calculator.html">Calculator</a>
+			<a href="/upload.html">Upload</a>
+			<a href="/cookie.html">Cookie</a>
+			<a href="/login.html">Login</a>
+		</div>
+	</nav>
+	<div id="app">
+		<form action="/cgi-bin/calc.sh" method="get" class="calculator-form">
+			<input type="number" name="f_num" placeholder="Number" required>
+			<select name="oper" required>
+				<option value="+">+</option>
+				<option value="-">-</option>
+				<option value="*">×</option>
+				<option value="/">÷</option>
+			</select>
+			<input type="number" name="s_num" placeholder="Number" required>
+			<button type="submit">Calculate<span class="blink">_</span></button>
+		</form>
+	</div>
+</body>
+</html>

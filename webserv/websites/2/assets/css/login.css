@@ -1,0 +1,72 @@
+.auth-container {
+	display: flex;
+	flex-direction: column;
+	gap: 4rem;
+	width: 100%;
+	max-width: 500px;
+	margin-top: 2rem;
+}
+
+.login-form, .signup-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	background: rgba(84, 222, 254, 0.1);
+	padding: 2.5rem;
+	border: 2px solid #54DEFE;
+	box-shadow: 0 0 20px rgba(84, 222, 254, 0.3);
+	width: 100%;
+}
+
+h2 {
+	color: #54DEFE;
+	text-align: center;
+	margin: 0;
+	font-size: 1.3rem;
+	margin-bottom: 0.5rem;
+}
+
+input {
+	background: black;
+	border: 2px solid #54DEFE;
+	color: #54DEFE;
+	padding: 1.2rem;
+	font-size: 1rem;
+	width: 100%;
+	outline: none;
+	position: relative;
+}
+
+input:focus {
+	box-shadow: 0 0 15px rgba(84, 222, 254, 0.5);
+}
+
+.welcome-message {
+	color: #54DEFE;
+	font-size: 1.5rem;
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.logout-form {
+	display: flex;
+	justify-content: center;
+}
+
+.logout-button {
+	display: inline-block;
+	font-family: 'Press Start 2P', cursive;
+	background: #fe5454;
+	border: none;
+	color: black;
+	padding: 1rem 2rem;
+	font-size: 1.2rem;
+	cursor: pointer;
+	text-decoration: none;
+	transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+	background: #ffffff;
+	box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}

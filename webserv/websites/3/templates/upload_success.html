@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Webserv Upload</title>
+	<link href="../assets/css/style.css" rel="stylesheet" type="text/css">
+	<link href="../assets/css/upload.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<nav>
+		<div class="matrix-bg"></div>
+		<div class="logo"><a href="/">WEBSERV</a></div>
+		<div class="nav-links">
+			<a href="/calculator.html">Calculator</a>
+			<a href="/upload.html">Upload</a>
+			<a href="/cookie.html">Cookie</a>
+			<a href="/login.html">Login</a>
+		</div>
+	</nav>
+	<div id="app">
+		<form enctype="multipart/form-data" action="/cgi-bin/upload.py" method="post" class="upload-form">
+			<div class="file-input-container">
+				<input type="file" name="filename" id="fileid" class="file-input" accept="image/*" required>
+				<label for="fileid" class="file-label">Choose an image</label>
+			</div>
+			<div class="file-types">Accepted formats: JPG, PNG, GIF, WebP... </div>
+			<button type="submit">Upload<span class="blink">_</span></button>
+		</form>
+		<div id="description" style="color: green;">{{message}}</div>
+		<iframe src="/cgi-bin/display_gallery.py" frameborder="0" style="width:100%; border:none;"></iframe>
+	</div>
+</body>
+</html>
